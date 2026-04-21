@@ -9,12 +9,7 @@
 <meta property="og:description" content="The right room. Preferred partner perks. Same rate as booking direct.">
 <meta property="og:type" content="website">
 
-<!-- ══ GOOGLE ANALYTICS (GA4) ══════════════════════════════
-     SETUP: Replace YOUR_GA4_MEASUREMENT_ID below with your
-     real ID (format: G-XXXXXXXXXX).
-     To get it: analytics.google.com → Admin → Data Streams
-     → your stream → Measurement ID
-════════════════════════════════════════════════════════════ -->
+<!-- ══ GOOGLE ANALYTICS (GA4) ══════════════════════════════ -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5DTSWHJLZC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -1000,19 +995,13 @@ footer {
 </footer>
 
 <!-- ══ EMAIL CLICK TRACKING ══════════════════════════════════
-     Fires both a Meta Pixel Lead event AND a GA4 event
-     whenever any email button is clicked. The data-location
-     attribute tells you which button was clicked.
+     Fires a GA4 event whenever any email button is clicked.
+     The data-location attribute tells you which button was clicked.
 ════════════════════════════════════════════════════════════ -->
 <script>
   document.querySelectorAll('[data-track="email_click"]').forEach(function(el) {
     el.addEventListener('click', function() {
       var location = this.getAttribute('data-location') || 'unknown';
-
-      // Meta Pixel — fires a Lead event (optimizable in Ads Manager)
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', { content_name: 'email_click', content_category: location });
-      }
 
       // GA4 — fires a custom event visible in Reports > Events
       if (typeof gtag !== 'undefined') {
