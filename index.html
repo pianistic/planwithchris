@@ -8,7 +8,46 @@
 <meta property="og:title" content="Christopher Chung · Luxury Travel Advisor · Bali & Singapore">
 <meta property="og:description" content="The right room. Preferred partner perks. Same rate as booking direct.">
 <meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<!-- ══ GOOGLE ANALYTICS (GA4) ══════════════════════════════
+     SETUP: Replace YOUR_GA4_MEASUREMENT_ID below with your
+     real ID (format: G-XXXXXXXXXX).
+     To get it: analytics.google.com → Admin → Data Streams
+     → your stream → Measurement ID
+════════════════════════════════════════════════════════════ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA4_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'YOUR_GA4_MEASUREMENT_ID');
+</script>
+
+<!-- ══ META PIXEL ════════════════════════════════════════════
+     SETUP: Replace YOUR_META_PIXEL_ID below with your real
+     Pixel ID (15-digit number).
+     To get it: business.facebook.com → Events Manager
+     → your Pixel → Settings → Pixel ID
+════════════════════════════════════════════════════════════ -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'YOUR_META_PIXEL_ID');
+  fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=YOUR_META_PIXEL_ID&ev=PageView&noscript=1"/>
+</noscript>
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230B1924'/><text x='50%25' y='54%25' font-family='Georgia,serif' font-size='13' font-weight='700' fill='%23C9A84C' text-anchor='middle' dominant-baseline='middle'>CC</text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230B1924'/><text x='50%25' y='54%25' font-family='Georgia,serif' font-size='13' font-weight='700' fill='%23C9A84C' text-anchor='middle' dominant-baseline='middle'>CC</text></svg>">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -773,7 +812,7 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="nav-brand">Christopher Chung <span>· Fora Travel</span></div>
-  <a href="mailto:christopher.chung@fora.travel" class="nav-cta">
+  <a href="mailto:christopher.chung@fora.travel" class="nav-cta" data-track="email_click" data-location="nav">
     Email to Plan Your Trip
   </a>
 </nav>
@@ -793,7 +832,7 @@ footer {
       I specialize in luxury hotel bookings for <strong>families and couples</strong> traveling to Bali and Singapore — at the same rate as booking direct, with perks that aren't available on your own.
     </p>
     <div class="fade-up delay-4">
-      <a href="mailto:christopher.chung@fora.travel" class="btn-primary">
+      <a href="mailto:christopher.chung@fora.travel" class="btn-primary" data-track="email_click" data-location="hero">
         Email Me to Start Planning
       </a>
       <a href="#how-it-works" class="btn-secondary">
@@ -963,7 +1002,7 @@ footer {
     <div class="section-eyebrow" style="justify-content:center;">Ready When You Are</div>
     <h2 class="cta-title">Plan your trip to Bali<br>or <em>Singapore.</em></h2>
     <p class="cta-sub">Email me with your destination and travel dates — I'll come back with the right options within 24 hours.</p>
-    <a href="mailto:christopher.chung@fora.travel" class="btn-primary" style="font-size:0.88rem; padding:18px 44px;">
+    <a href="mailto:christopher.chung@fora.travel" class="btn-primary" style="font-size:0.88rem; padding:18px 44px;" data-track="email_click" data-location="cta_bottom">
       Email christopher.chung@fora.travel
     </a>
     <p class="cta-email-display">christopher.chung@fora.travel</p>
@@ -977,11 +1016,37 @@ footer {
     <strong>Christopher Chung</strong> · Fora Certified Travel Advisor
   </div>
   <div class="footer-links">
-    <a href="mailto:christopher.chung@fora.travel">christopher.chung@fora.travel</a>
+    <a href="mailto:christopher.chung@fora.travel" data-track="email_click" data-location="footer">christopher.chung@fora.travel</a>
     <a href="https://www.foratravel.com/advisor/christopher-chung" target="_blank" rel="noopener">Fora Profile</a>
   </div>
   <div class="footer-fora">Fora Travel · Portland, OR</div>
 </footer>
+
+<!-- ══ EMAIL CLICK TRACKING ══════════════════════════════════
+     Fires both a Meta Pixel Lead event AND a GA4 event
+     whenever any email button is clicked. The data-location
+     attribute tells you which button was clicked.
+════════════════════════════════════════════════════════════ -->
+<script>
+  document.querySelectorAll('[data-track="email_click"]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var location = this.getAttribute('data-location') || 'unknown';
+
+      // Meta Pixel — fires a Lead event (optimizable in Ads Manager)
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', { content_name: 'email_click', content_category: location });
+      }
+
+      // GA4 — fires a custom event visible in Reports > Events
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'email_click', {
+          event_category: 'engagement',
+          event_label: location
+        });
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
