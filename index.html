@@ -366,6 +366,63 @@ body[data-density="compact"] .section-lead{margin-bottom:44px}
 
 /* Focus states */
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* Success state after Web3Forms submission */
+.micro-form.mf-sent{
+  background:var(--white);
+  border-color:var(--gold);
+  backdrop-filter:none;
+  box-shadow:0 24px 70px -24px rgba(0,0,0,.4),0 0 0 1px rgba(201,168,76,.2);
+}
+.cta-form-wrap:has(.mf-sent),
+.cta-form-wrap.mf-sent-wrap{
+  background:var(--white);
+  border-color:var(--gold);
+}
+.mf-success{
+  text-align:center;
+  padding:20px 12px 8px;
+  animation:successIn .5s cubic-bezier(.2,.9,.3,1) both;
+}
+.mf-success-mark{
+  width:56px;height:56px;margin:0 auto 20px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold) 0%,#d4b25c 100%);
+  color:var(--navy);
+  font-size:28px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(201,168,76,.3);
+}
+.mf-success-title{
+  font-family:var(--serif);
+  font-size:1.75rem;
+  font-weight:400;
+  color:var(--navy);
+  margin-bottom:12px;
+  letter-spacing:-.005em;
+  line-height:1.25;
+}
+.mf-success-title em{color:var(--gold);font-style:italic}
+.mf-success-body{
+  font-size:.95rem;
+  line-height:1.75;
+  color:var(--text-muted);
+  max-width:400px;
+  margin:0 auto 20px;
+  font-weight:300;
+}
+.mf-success-sig{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:1.15rem;
+  color:var(--gold);
+  font-weight:400;
+}
+.mf-submit:disabled{opacity:.65;cursor:wait;transform:none}
+@keyframes successIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
 </style>
 </head>
 <body data-hero="form" data-cta="form" data-density="comfortable">
@@ -431,15 +488,29 @@ document.body.dataset.density = TWEAKS.density;
           </div>
         </div>
 
+        <div class="mf-row full">
+          <div class="mf-field">
+            <label for="h-email">Your email</label>
+            <input id="h-email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+        </div>
+
         <button type="submit" class="mf-submit">
-          Send my trip details
+          <span class="mf-submit-label">Send my trip details</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
 
         <div class="mf-foot">
-          <span>Opens your email app</span>
+          <span>Sends directly to Chris</span>
           <span>Reply in 24&ndash;48h</span>
           <span>No calls required</span>
+        </div>
+
+        <div class="mf-success" hidden>
+          <div class="mf-success-mark">✓</div>
+          <div class="mf-success-title">Got it &mdash; <em>thank you.</em></div>
+          <div class="mf-success-body">Your trip details are on their way to me. I'll reply personally within 24&ndash;48 hours.</div>
+          <div class="mf-success-sig">&mdash; Chris</div>
         </div>
       </form>
     </div>
@@ -451,7 +522,7 @@ document.body.dataset.density = TWEAKS.density;
         I specialize in luxury hotel bookings for <strong>families and couples</strong> traveling to Bali and Singapore — at the same rate as booking direct, with perks that aren't available when you book on your own.
       </p>
       <div class="fade-up delay-4">
-        <a href="/cdn-cgi/l/email-protection#27444f554e545348574f425509444f52494067414855460953554651424b185452454d4244531a774b4649494e49400215174602151753554e57021517534802151765464b4e021517021561021517744e49404657485542014548435e1a6f4e021517644f554e540215640217660217666e00430215174b4851420215174f424b57021517574b4649494e49400215174602151753554e57090215176f42554202151746554202151746021517414250021517434253464e4b54021466021766021766634254534e4946534e484902146602151702176673554651424b0215174346534254021466021517021766704f48005402151753554651424b4e494002146602151702176663464e4b5e0215174f4853424b021517455243404253021466021517021766021766734f46494c54021516" class="btn-primary" data-track="email_click" data-location="hero_classic">
+        <a href="/cdn-cgi/l/email-protection#65060d170c16110a150d00174b060d100b0225030a17044b1117041300095a1610070f000611583509040b0b0c0b024057550440575511170c15405755110a4057552704090c405755405723405755360c0b0204150a170043070a011c582d0c405755260d170c164057264055244055242c4201405755090a13004057550d0009154057551509040b0b0c0b024057550440575511170c154b4057552d00170040575504170040575504405755030012405755010011040c0916405624405524405524210016110c0b04110c0a0b4056244057554055243117041300094057550104110016405624405755405524320d0a42164057551117041300090c0b0240562440575540552421040c091c4057550d0a110009405755071001020011405624405755405524405524310d040b0e16405754" class="btn-primary" data-track="email_click" data-location="hero_classic">
           Email Me to Start Planning
         </a>
         <a href="#how-it-works" class="btn-secondary">See How It Works</a>
@@ -709,7 +780,7 @@ document.body.dataset.density = TWEAKS.density;
       <div class="cta-form-wrap">
         <form id="ctaForm" onsubmit="return submitForm(event,'cta_bottom')">
           <div class="micro-form-title">Tell me about <em>your trip.</em></div>
-          <div class="micro-form-sub">Opens your email app pre-filled — just review and send.</div>
+          <div class="micro-form-sub">Sends directly to me. I'll reply within 24&ndash;48 hours.</div>
           <div class="mf-row">
             <div class="mf-field">
               <label for="c-dest">Destination</label>
@@ -732,14 +803,27 @@ document.body.dataset.density = TWEAKS.density;
               <input id="c-who" name="who" type="text" placeholder="e.g. Couple · anniversary · no kids" required>
             </div>
           </div>
+          <div class="mf-row full">
+            <div class="mf-field">
+              <label for="c-email">Your email</label>
+              <input id="c-email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+            </div>
+          </div>
           <button type="submit" class="mf-submit">
-            Send my trip details
+            <span class="mf-submit-label">Send my trip details</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
           <div class="mf-foot">
-            <span>Opens your email app</span>
+            <span>Sends directly to Chris</span>
             <span>Reply in 24&ndash;48h</span>
             <span>No calls required</span>
+          </div>
+
+          <div class="mf-success" hidden>
+            <div class="mf-success-mark">✓</div>
+            <div class="mf-success-title">Got it &mdash; <em>thank you.</em></div>
+            <div class="mf-success-body">Your trip details are on their way to me. I'll reply personally within 24&ndash;48 hours.</div>
+            <div class="mf-success-sig">&mdash; Chris</div>
           </div>
         </form>
       </div>
@@ -747,10 +831,10 @@ document.body.dataset.density = TWEAKS.density;
 
     <!-- CTA VARIANT: EMAIL -->
     <div class="cta-email">
-      <a href="/cdn-cgi/l/email-protection#1b78736972686f746b737e693578736e757c5b7d74697a356f697a6d7e7724686e79717e786f264b777a757572757c3e292b7a3e292b6f69726b3e292b6f743e292b597a77723e292b3e295d3e292b4872757c7a6b74697e3d79747f622653723e292b58736972683e29583e2b5a3e2b5a523c7f3e292b77746d7e3e292b737e776b3e292b6b777a757572757c3e292b7a3e292b6f69726b353e292b537e697e3e292b7a697e3e292b7a3e292b7d7e6c3e292b7f7e6f7a7277683e285a3e2b5a3e2b5a5f7e686f72757a6f7274753e285a3e292b3e2b5a4f697a6d7e773e292b7f7a6f7e683e285a3e292b3e2b5a4c73743c683e292b6f697a6d7e7772757c3e285a3e292b3e2b5a5f7a7277623e292b73746f7e773e292b796e7f7c7e6f3e285a3e292b3e2b5a3e2b5a4f737a7570683e292a" class="btn-primary" style="font-size:.86rem;padding:18px 44px" data-track="email_click" data-location="cta_bottom_email">
-        Email <span class="__cf_email__" data-cfemail="44272c362d37302b342c21366a272c312a2304222b36256a303625322128">[email&#160;protected]</span>
+      <a href="/cdn-cgi/l/email-protection#94f7fce6fde7e0fbe4fcf1e6baf7fce1faf3d4f2fbe6f5bae0e6f5e2f1f8abe7e1f6fef1f7e0a9c4f8f5fafafdfaf3b1a6a4f5b1a6a4e0e6fde4b1a6a4e0fbb1a6a4d6f5f8fdb1a6a4b1a6d2b1a6a4c7fdfaf3f5e4fbe6f1b2f6fbf0eda9dcfdb1a6a4d7fce6fde7b1a6d7b1a4d5b1a4d5ddb3f0b1a6a4f8fbe2f1b1a6a4fcf1f8e4b1a6a4e4f8f5fafafdfaf3b1a6a4f5b1a6a4e0e6fde4bab1a6a4dcf1e6f1b1a6a4f5e6f1b1a6a4f5b1a6a4f2f1e3b1a6a4f0f1e0f5fdf8e7b1a7d5b1a4d5b1a4d5d0f1e7e0fdfaf5e0fdfbfab1a7d5b1a6a4b1a4d5c0e6f5e2f1f8b1a6a4f0f5e0f1e7b1a7d5b1a6a4b1a4d5c3fcfbb3e7b1a6a4e0e6f5e2f1f8fdfaf3b1a7d5b1a6a4b1a4d5d0f5fdf8edb1a6a4fcfbe0f1f8b1a6a4f6e1f0f3f1e0b1a7d5b1a6a4b1a4d5b1a4d5c0fcf5faffe7b1a6a5" class="btn-primary" style="font-size:.86rem;padding:18px 44px" data-track="email_click" data-location="cta_bottom_email">
+        Email <span class="__cf_email__" data-cfemail="03606b716a70776c736b66712d606b766d6443656c71622d77716275666f">[email&#160;protected]</span>
       </a>
-      <p class="cta-email-display"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="600308120913140f100805124e0308150e0720060f12014e14120116050c">[email&#160;protected]</a></p>
+      <p class="cta-email-display"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfaca7bda6bcbba0bfa7aabde1aca7baa1a88fa9a0bdaee1bbbdaeb9aaa3">[email&#160;protected]</a></p>
     </div>
 
     <p class="cta-fine">No calls required · Responses within 24–48 hours · New clients welcome</p>
@@ -781,7 +865,7 @@ document.body.dataset.density = TWEAKS.density;
 <footer>
   <div class="footer-brand"><strong>Christopher Chung</strong> · Fora Certified Travel Advisor</div>
   <div class="footer-links">
-    <a href="/cdn-cgi/l/email-protection#402328322933342f302825326e2328352e2700262f32216e34322136252c" data-track="email_click" data-location="footer"><span class="__cf_email__" data-cfemail="ef8c879d869c9b809f878a9dc18c879a8188af89809d8ec19b9d8e998a83">[email&#160;protected]</span></a>
+    <a href="/cdn-cgi/l/email-protection#7f1c170d160c0b100f171a0d511c170a11183f19100d1e510b0d1e091a13" data-track="email_click" data-location="footer"><span class="__cf_email__" data-cfemail="5c3f342e352f28332c34392e723f3429323b1c3a332e3d72282e3d2a3930">[email&#160;protected]</span></a>
     <a href="https://www.foratravel.com/advisor/christopher-chung" target="_blank" rel="noopener">Fora Profile</a>
   </div>
   <div class="footer-fora">Fora Travel · Portland, OR</div>
@@ -818,37 +902,84 @@ document.body.dataset.density = TWEAKS.density;
 
 <!-- ═══ SCRIPTS ═══ -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// ── FORM → MAILTO (the core conversion improvement) ──
-function submitForm(e, location) {
+// ── FORM → WEB3FORMS (direct email submission, mailto fallback) ──
+const WEB3FORMS_KEY = '0ca94266-517b-43dc-b2d2-d0f045ebeb5f';
+
+async function submitForm(e, location) {
   e.preventDefault();
   const form = e.target;
+  const btn = form.querySelector('.mf-submit');
+  const labelEl = btn.querySelector('.mf-submit-label');
+  const success = form.querySelector('.mf-success');
+
   const dest = form.querySelector('[name="destination"]').value.trim();
   const when = form.querySelector('[name="when"]').value.trim();
   const who = form.querySelector('[name="who"]').value.trim();
+  const email = form.querySelector('[name="email"]').value.trim();
 
-  const subject = `Planning a trip to ${dest || 'Bali / Singapore'}`;
-  const body =
-    `Hi Chris,\n\n` +
-    `I'd like help planning a trip. Here's what I've got so far:\n\n` +
+  const subject = `New trip inquiry — ${dest || 'Bali / Singapore'}`;
+  const message =
+    `New trip inquiry from planwithchris.com\n\n` +
+    `From: ${email}\n` +
     `Destination: ${dest}\n` +
     `When: ${when}\n` +
-    `Who's traveling: ${who}\n` +
-    `Daily hotel budget (optional): \n\n` +
-    `A few other things you should know:\n\n\n` +
-    `Thanks!`;
+    `Who's traveling: ${who}\n\n` +
+    `Source: ${location}\n`;
 
-  const mailto = `mailto:christopher.chung@fora.travel?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  // UI: disable + show sending state
+  btn.disabled = true;
+  const originalLabel = labelEl.textContent;
+  labelEl.textContent = 'Sending…';
 
   // Track
   if (typeof gtag !== 'undefined') {
-    gtag('event', 'email_click', {
+    gtag('event', 'form_submit', {
       event_category: 'engagement',
-      event_label: location + '_form',
+      event_label: location,
       destination: dest
     });
   }
 
-  window.location.href = mailto;
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: subject,
+        from_name: 'planwithchris.com',
+        replyto: email,
+        email: email,
+        destination: dest,
+        when: when,
+        who: who,
+        source: location,
+        message: message,
+        botcheck: ''
+      })
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message || 'Submission failed');
+
+    // Success — swap form for thank-you
+    form.classList.add('mf-sent');
+    const ctaWrap = form.closest('.cta-form-wrap');
+    if (ctaWrap) ctaWrap.classList.add('mf-sent-wrap');
+    form.querySelectorAll('.mf-row, .mf-submit, .mf-foot, .micro-form-title, .micro-form-sub').forEach(el => el.style.display = 'none');
+    success.hidden = false;
+
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'form_submit_success', { event_category: 'engagement', event_label: location });
+    }
+  } catch (err) {
+    // Fallback: open email app pre-filled so nothing is lost
+    console.warn('Form submit failed, falling back to mailto:', err);
+    const body = `Hi Chris,\n\nI'd like help planning a trip. Here's what I've got so far:\n\nDestination: ${dest}\nWhen: ${when}\nWho's traveling: ${who}\nMy email: ${email}\n\nThanks!`;
+    window.location.href = `mailto:christopher.chung@fora.travel?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    btn.disabled = false;
+    labelEl.textContent = originalLabel;
+  }
+
   return false;
 }
 
